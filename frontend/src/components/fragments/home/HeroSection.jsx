@@ -36,7 +36,7 @@ const HeroSection = () => {
               </div>
               <div>
                 <h2 className="text-[36px] leading-[56px] lg:leading-[44px] font-bold">
-                  5+
+                  100%
                 </h2>
                 <span className="w-[100px] h-2 bg-irisBlueColor rounded-full block mt-[-14px]"></span>
                 <p className="text-para">Patient SatisFacation</p>

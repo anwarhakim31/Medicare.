@@ -74,7 +74,7 @@ const Header = () => {
             onClick={(e) => {
               e.target === e.currentTarget && handleToggleNav();
             }}
-            role={isNav && "dialog"}
+            role={isNav ? "dialog" : ""}
           >
             <ul className="primary-list  flex items-center gap-[2.7rem]">
               <li className="md:hidden position absolute top-2 right-2 ">
