@@ -9,6 +9,14 @@
 }
 
 @layer components {
+  .header {
+    @apply bg-[url('./assets/images/mask.png')] bg-no-repeat bg-center bg-cover w-full h-[80px];
+  }
+
+  .hero-section {
+    @apply bg-[url('./assets/images/hero-bg.png')] bg-cover bg-no-repeat bg-center;
+  }
+
   .container {
     @apply w-full max-w-[1440px] px-5 mx-auto;
   }
