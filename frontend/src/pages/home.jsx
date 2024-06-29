@@ -5,6 +5,7 @@ import AboutSection from "../components/fragments/home/AboutSection";
 import ServiceSection from "../components/fragments/home/ServiceSection";
 import FeatureSection from "../components/fragments/home/FeatureSection";
 import OurdoctorSection from "../components/fragments/home/OurdoctorSection";
+import FaqSection from "../components/fragments/home/FaqSection";
 
 const HomePage = () => {
   return (
@@ -15,6 +16,7 @@ const HomePage = () => {
       <ServiceSection />
       <FeatureSection />
       <OurdoctorSection />
+      <FaqSection />
     </>
   );
 };
