@@ -10,7 +10,7 @@ const DoctorCard = () => {
       {doctors.map((doctor, index) => (
         <div
           key={doctor.id}
-          className="p-3 xl:p-5 col-span-full mobile:col-span-4 lg:col-span-3"
+          className="p-3 xl:p-5 col-span-full mobile:col-span-6 md:col-span-4 lg:col-span-3"
         >
           <div>
             <img src={doctor.photo} alt={doctor.name} className="w-full" />
