@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import image from "../assets/images/doctor-img02.png";
 import starIcon from "../assets/images/Star.png";
-import DoctorAbout from "../components/elements/doctor-details/DoctorAbout";
-import DoctorFeedback from "../components/elements/doctor-details/DoctorFeedback";
+import DoctorAbout from "../components/fragments/doctor-details/DoctorAbout";
+import DoctorFeedback from "../components/fragments/doctor-details/DoctorFeedback";
+import SidePanel from "../components/fragments/doctor-details/SidePanel";
 
 const DoctorDetailsPage = () => {
   const [tab, setTab] = useState("About");
@@ -63,6 +64,9 @@ const DoctorDetailsPage = () => {
             {tab === "About" && <DoctorAbout />}
             {tab === "Feedback" && <DoctorFeedback />}
           </div>
+        </div>
+        <div>
+          <SidePanel />
         </div>
       </div>
     </section>
