@@ -6,6 +6,7 @@ import DoctorPage from "../../pages/doctor";
 import DoctorDetailsPage from "../../pages/doctorDetails";
 import LoginPage from "../../pages/login";
 import RegisterPage from "../../pages/register";
+import ContactPage from "../../pages/contact";
 
 const Routers = () => {
   return (
@@ -17,6 +18,7 @@ const Routers = () => {
       <Route path="/doctors" element={<DoctorPage />} />
       <Route path="/doctors/:id" element={<DoctorDetailsPage />} />
       <Route path="/services" element={<ServicePage />} />
+      <Route path="/contact" element={<ContactPage />} />
     </Routes>
   );
 };
