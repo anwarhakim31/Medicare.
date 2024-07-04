@@ -1,0 +1,62 @@
+POST http://localhost:5000/api/v1/auth/register
+Content-Type: application/json
+Accept: application/json
+
+{
+    "name":"hakim",
+    "email":"hakim@gmail.com",
+    "password":"hakim31",
+    "role":"patient"
+}
+
+###
+POST http://localhost:5000/api/v1/auth/login
+Content-Type: application/json
+Accept: application/json
+
+{
+    "email":"hakim@gmail.com",
+    "password":"hakim31"
+}
+
+
+//users
+
+###
+GET  http://localhost:5000/api/v1/users/
+Content-Type: application/json
+Accept: application/json
+
+{
+   
+}
+
+###
+DELETE http://localhost:5000/api/v1/users/6686901b761e5f741445b3fc
+Content-Type: application/json
+Accept: application/json
+
+{
+   
+}
+
+
+###
+GET  http://localhost:5000/api/v1/users/668691ed1943fd8f364ee987
+Content-Type: application/json
+Accept: application/json
+
+{
+   
+}
+
+###
+PUT   http://localhost:5000/api/v1/users/668691ed1943fd8f364ee987
+Content-Type: application/json
+Accept: application/json
+
+{
+   "role":"patient"
+}
+
+////doctor
