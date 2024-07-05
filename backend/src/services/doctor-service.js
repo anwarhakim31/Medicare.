@@ -22,7 +22,9 @@ const remove = async (id) => {
 };
 
 const getSingle = async (id) => {
-  const doctor = await Doctor.findById(id).select("-password");
+  const doctor = await Doctor.findById(id)
+    .populate("reviews")
+    .select("-password");
 
   if (!doctor) {
     throw new ResponseError(404, "Doctor is not found");
@@ -31,8 +33,20 @@ const getSingle = async (id) => {
   return doctor;
 };
 
-const getAll = async () => {
-  const doctor = await Doctor.find({}).select("-password");
+const getAll = async (query) => {
+  let doctor;
+
+  if (query) {
+    doctor = await Doctor.find({
+      isApproved: "approved",
+      $or: [
+        { name: { $regex: query, $options: "i" } },
+        { specialization: { $regex: query, $options: "i" } },
+      ],
+    }).select("-password");
+  } else {
+    doctor = await Doctor.find({ isApproved: "approved" }).select("-password");
+  }
 
   if (!doctor) {
     throw new ResponseError(404, "Doctor is not found");
@@ -41,5 +55,4 @@ const getAll = async () => {
   return doctor;
 };
 
-
-export default {update,delete,getSingle,getAll}
+export default { update, remove, getSingle, getAll };

@@ -1,11 +1,25 @@
 import express from "express";
-import doctorService from "../services/doctor-service.js";
+import doctorController from "../controller/doctor-controller.js";
+import { authenticate, restrict } from "../middleware/auth-middleware.js";
+import { reviewRouter } from "./review-router.js";
 
 const doctorRouter = new express.Router();
 
-doctorRouter.put("/:id", doctorService.update);
-doctorRouter.delete("/:id", doctorService.remove);
-doctorRouter.get("/:id", doctorService.getSingle);
-doctorRouter.get("/", doctorService.getAll);
+doctorRouter.use("/:doctorId/reviews", reviewRouter);
+
+doctorRouter.put(
+  "/:id",
+  authenticate,
+  restrict([`doctor`]),
+  doctorController.update
+);
+doctorRouter.delete(
+  "/:id",
+  authenticate,
+  restrict([`doctor`]),
+  doctorController.remove
+);
+doctorRouter.get("/:id", doctorController.getSingle);
+doctorRouter.get("/", doctorController.getAll);
 
 export { doctorRouter };

@@ -3,6 +3,11 @@ import Doctor from "../models/DoctorSchema.js";
 import { ResponseError } from "../error/response-error.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import { validate } from "../validation/validate.js";
+import {
+  loginValidation,
+  registerValidation,
+} from "../validation/auth-validation.js";
 
 const generateToken = (user) => {
   return jwt.sign(
@@ -13,18 +18,21 @@ const generateToken = (user) => {
 };
 
 const register = async (request) => {
+  await validate(registerValidation, request);
+
   const { email, password, name, role, photo, gender } = request;
 
   let user = null;
 
   if (role === "patient") {
     user = await User.findOne({ email });
-  } else if (role === "doctor") {
+  }
+  if (role === "doctor") {
     user = await Doctor.findOne({ email });
   }
 
   if (user) {
-    throw new ResponseError(400, "User already exists");
+    throw new ResponseError(400, "Email is already exists");
   }
 
   const salt = await bcrypt.genSalt(10);
@@ -54,18 +62,16 @@ const register = async (request) => {
 };
 
 const login = async (request) => {
+  await validate(loginValidation, request);
+
   const { email } = request;
 
   let user = null;
 
   const patient = await User.findOne({ email });
-  const doctor = await Doctor.findOne({ email });
 
   if (patient) {
     user = patient;
-  }
-  if (doctor) {
-    user = doctor;
   }
 
   if (!user) {

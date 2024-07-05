@@ -1,12 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import avatar from "../../assets/images/doctor-img02.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import uploadImageToCloudinary from "../../../util/upload-cloudinary";
+import { URL } from "../../constant/config";
+import { toast } from "react-toastify";
+import HashLoader from "react-spinners/HashLoader";
 
 const Register = () => {
   const [selectFile, setSelectFile] = useState(null);
   const [previewUrl, setPreviewUrl] = useState("");
   const [formData, setFormData] = useState({
-    fullname: "",
+    name: "",
     email: "",
     password: "",
     photo: selectFile,
@@ -14,18 +18,49 @@ const Register = () => {
     gender: "",
   });
 
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
 
-    setFormData((prevState) => ({ prevState, [name]: value }));
+    setFormData((prevState) => ({ ...prevState, [name]: value }));
   };
 
   const handleFileChange = async (e) => {
     const file = e.target.files[0];
+
+    const data = await uploadImageToCloudinary(file);
+
+    setPreviewUrl(data.url);
+    setSelectFile(data.url);
+    setFormData({ ...formData, photo: data.url });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    setLoading(true);
+    try {
+      const res = await fetch(URL + "/auth/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+      const { message, errors } = await res.json();
+      if (!res.ok) {
+        throw new Error(errors);
+      }
+
+      toast.success(message);
+      navigate("/login");
+    } catch (error) {
+      toast.error(error.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -34,11 +69,10 @@ const Register = () => {
         <input
           type="text"
           placeholder="Enter Your Full Name"
-          name="fullname"
-          value={formData.fullname}
+          name="name"
+          value={formData.name}
           onChange={handleInputChange}
           className="w-full py-3 border-b border-solid border-[#0066ff61] focus:outline-none focus:border-primaryColor text-[16px] leading-7 text-headingColor placeholder:text-textColor  "
-          required
         />
       </div>
       <div className="mb-5">
@@ -49,7 +83,6 @@ const Register = () => {
           value={formData.email}
           onChange={handleInputChange}
           className="w-full py-3 border-b border-solid border-[#0066ff61] focus:outline-none focus:border-primaryColor text-[16px] leading-7 text-headingColor placeholder:text-textColor  "
-          required
         />
       </div>
       <div className="mb-5">
@@ -60,7 +93,6 @@ const Register = () => {
           value={formData.password}
           onChange={handleInputChange}
           className="w-full py-3 border-b border-solid mt-1 border-[#0066ff61] focus:outline-none focus:border-primaryColor text-[16px] leading-7 text-headingColor placeholder:text-textColor  "
-          required
         />
       </div>
       <div className="mb-6 flex justify-between items-center">
@@ -77,11 +109,11 @@ const Register = () => {
             <option value={"doctor"}>Doctor</option>
           </select>
         </label>
-        <label htmlFor="roles">
+        <label htmlFor="gender">
           Gender :
           <select
-            name="role"
-            id="roles"
+            name="gender"
+            id="gender"
             onChange={handleInputChange}
             value={formData.gender}
             className="text-textColor font-semibold text-[15px] leading-7 px-4 py-3 focus:outline-none"
@@ -93,13 +125,15 @@ const Register = () => {
         </label>
       </div>
       <div className="mb-5 flex items-center gap-3">
-        <figure className="w-[60px] h-[60px] rounded-full border-2 border-solid border-primaryColor flex justify-center items-center">
-          <img
-            src={avatar}
-            alt="profile image"
-            className="w-full rounded-full block"
-          />
-        </figure>
+        {selectFile && (
+          <figure className="w-[60px] h-[60px] rounded-full overflow-hidden border-2 border-solid border-primaryColor flex justify-center items-center">
+            <img
+              src={previewUrl}
+              alt="profile image"
+              className="w-full h-full rounded-full object-contain object-center"
+            />
+          </figure>
+        )}
         <div className="relative w-[130px] h-[40px]">
           <input
             type="file"
@@ -119,11 +153,12 @@ const Register = () => {
       </div>
       <div className="mt-7">
         <button
+          disabled={loading}
           type="submit"
           aria-label="button login"
           className="w-full bg-primaryColor text-white text-[18px] leading-[30px] rounded-lg px-4 py-3"
         >
-          Sign Up
+          {loading ? <HashLoader size={35} color={`#ffffff`} /> : "Sign Up"}
         </button>
       </div>
 

@@ -1,11 +1,13 @@
 import express from "express";
 import userController from "../controller/user-controller.js";
+import { authenticate, restrict } from "../middleware/auth-middleware.js";
 
 const userRouter = new express.Router();
 
-userRouter.put("/:id", userController.update);
-userRouter.delete("/:id", userController.remove);
-userRouter.get("/:id", userController.getSingle);
-userRouter.get("/", userController.getAll);
+userRouter.use(authenticate);
+userRouter.put("/:id", restrict([`patient`]), userController.update);
+userRouter.delete("/:id", restrict(`patient`), userController.remove);
+userRouter.get("/:id", restrict(`patient`), userController.getSingle);
+userRouter.get("/", restrict(`admin`), userController.getAll);
 
 export { userRouter };

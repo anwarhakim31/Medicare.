@@ -6,7 +6,7 @@ Accept: application/json
     "name":"hakim",
     "email":"hakim@gmail.com",
     "password":"hakim31",
-    "role":"patient"
+    "role":"doctor"
 }
 
 ###
@@ -26,15 +26,17 @@ Accept: application/json
 GET  http://localhost:5000/api/v1/users/
 Content-Type: application/json
 Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ODc2ZWU3NTBlM2FiZDc4Y2Q3Y2JjNiIsInJvbGUiOiJwYXRpZW50IiwiaWF0IjoxNzIwMTUxOTI5LCJleHAiOjE3MjAxNTU1Mjl9.Z4Opz23nTrJbu6MOzdiJ9PPpBwUTPwrSPd4ygjv84Fk
 
 {
    
 }
 
 ###
-DELETE http://localhost:5000/api/v1/users/6686901b761e5f741445b3fc
+DELETE http://localhost:5000/api/v1/users/66876ee750e3abd78cd7cbc6
 Content-Type: application/json
 Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ODc2ZWU3NTBlM2FiZDc4Y2Q3Y2JjNiIsInJvbGUiOiJwYXRpZW50IiwiaWF0IjoxNzIwMTUxOTI5LCJleHAiOjE3MjAxNTU1Mjl9.Z4Opz23nTrJbu6MOzdiJ9PPpBwUTPwrSPd4ygjv84Fk
 
 {
    
@@ -42,9 +44,11 @@ Accept: application/json
 
 
 ###
-GET  http://localhost:5000/api/v1/users/668691ed1943fd8f364ee987
+GET  http://localhost:5000/api/v1/users/66876ee750e3abd78cd7cbc6    
 Content-Type: application/json
 Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ODc2ZWU3NTBlM2FiZDc4Y2Q3Y2JjNiIsInJvbGUiOiJwYXRpZW50IiwiaWF0IjoxNzIwMTU0MzIyLCJleHAiOjE3MjAxNTc5MjJ9.kdk3dInh4yj5w_PcD8B8R3KUSdQ8hovQR0nXiyVdsOA
+
 
 {
    
@@ -59,4 +63,63 @@ Accept: application/json
    "role":"patient"
 }
 
-////doctor
+//doctor
+###
+GET  http://localhost:5000/api/v1/doctors/
+Content-Type: application/json
+Accept: application/json
+
+{
+   
+}
+
+###
+DELETE http://localhost:5000/api/v1/doctors/6686b21a253cac8312963144
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ODZiMjFhMjUzY2FjODMxMjk2MzE0NCIsInJvbGUiOiJkb2N0b3IiLCJpYXQiOjE3MjAxNTE4NTgsImV4cCI6MTcyMDE1NTQ1OH0.J2fl1VTWs3dAAn6t0taWu5H72754yj4I4hoG3nrTa2M
+
+{
+   
+}
+
+
+###
+GET  http://localhost:5000/api/v1/doctors/668795209fa78b9b47ad01d6
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ODZiMjFhMjUzY2FjODMxMjk2MzE0NCIsInJvbGUiOiJkb2N0b3IiLCJpYXQiOjE3MjAxNTE4NTgsImV4cCI6MTcyMDE1NTQ1OH0.J2fl1VTWs3dAAn6t0taWu5H72754yj4I4hoG3nrTa2M
+
+{
+   
+}
+
+###
+PUT   http://localhost:5000/api/v1/doctors/668691ed1943fd8f364ee987
+Content-Type: application/json
+Accept: application/json
+
+{
+   "role":"patient"
+}
+
+###
+////review
+
+POST http://localhost:5000/api/v1/doctors/668795209fa78b9b47ad01d6/reviews
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ODc2ZWU3NTBlM2FiZDc4Y2Q3Y2JjNiIsInJvbGUiOiJwYXRpZW50IiwiaWF0IjoxNzIwMTY3NjYzLCJleHAiOjE3MjAxNzEyNjN9.lprZUiIuU-VeIJslonu7216goBraXmfGd3rStuTlp-I
+
+{
+   "reviewText":"Good Doctors",
+   "rating":5
+}
+###
+GET  http://localhost:5000/api/v1/doctors/668795209fa78b9b47ad01d6/reviews
+Content-Type: application/json
+Accept: application/json
+
+{
+ 
+}
