@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import avatar from "../../assets/images/doctor-img02.png";
 import { Link, useNavigate } from "react-router-dom";
-import uploadImageToCloudinary from "../../../util/upload-cloudinary";
+import uploadImageToCloudinary from "../../util/upload-cloudinary";
 import { URL } from "../../constant/config";
 import { toast } from "react-toastify";
 import HashLoader from "react-spinners/HashLoader";
@@ -158,7 +158,7 @@ const Register = () => {
           aria-label="button login"
           className="w-full bg-primaryColor text-white text-[18px] leading-[30px] rounded-lg px-4 py-3"
         >
-          {loading ? <HashLoader size={35} color={`#ffffff`} /> : "Sign Up"}
+          {loading ? <HashLoader size={18} color={`#ffffff`} /> : "Sign Up"}
         </button>
       </div>
 

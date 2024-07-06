@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import logo from "../../assets/images/logo.png";
 import { Link, NavLink } from "react-router-dom";
-import userImg from "../../assets/images/portrait-3d-male-doctor.jpg";
 import { HiMiniBars3 } from "react-icons/hi2";
 import { IoMdClose } from "react-icons/io";
+import { useAuth } from "../../context/AuthContext";
 const navLinks = [
   {
     path: "/home",
@@ -26,7 +26,8 @@ const navLinks = [
 const Header = () => {
   const [isNav, setIsNav] = useState(false);
   const headerRef = useRef(null);
-
+  const { state } = useAuth();
+  console.log(state);
   const handleToggleNav = () => {
     setIsNav(!isNav);
   };
@@ -103,23 +104,34 @@ const Header = () => {
           </div>
 
           <div className="flex items-center gap-4">
-            <div className="hidden">
-              <Link to={"/"}>
-                <figure className="w-[35px] h-[35px] rounded-full">
-                  <img
-                    src={userImg}
-                    alt="user-image"
-                    className="w-full h-full object-cover rounded-full"
-                  />
-                </figure>
+            {state.token && state.user ? (
+              <>
+                <div className="hidden">
+                  <Link
+                    to={`${
+                      state.role === "doctor"
+                        ? "/doctors/profile/me"
+                        : "/users/profile/me"
+                    } `}
+                  >
+                    <figure className="w-[35px] h-[35px] rounded-full">
+                      <img
+                        src={state.user?.photo}
+                        alt="user-image"
+                        className="w-full h-full object-cover rounded-full"
+                      />
+                    </figure>
+                    {/* <h1>{state.user?.name}</h1> */}
+                  </Link>
+                </div>
+              </>
+            ) : (
+              <Link to={"/login"}>
+                <button className="bg-primaryColor py-2 px-6 text-white font-semibold h-[36px]  flex items-center justify-center rounded-[50px]">
+                  Login
+                </button>
               </Link>
-            </div>
-
-            <Link to={"/login"}>
-              <button className="bg-primaryColor py-2 px-6 text-white font-semibold h-[36px]  flex items-center justify-center rounded-[50px]">
-                Login
-              </button>
-            </Link>
+            )}
 
             <button className="md:hidden" onClick={handleToggleNav}>
               <HiMiniBars3 className="text-2xl" />

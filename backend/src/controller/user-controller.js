@@ -56,4 +56,39 @@ const getAll = async (req, res, next) => {
   }
 };
 
-export default { update, remove, getSingle, getAll };
+const getUserProfile = async (req, res, next) => {
+  try {
+    const id = req.userId;
+
+    const result = await userService.getUserProfile(id);
+    res.status(200).json({
+      success: true,
+      data: result,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+const getMyAppointment = async (req, res, next) => {
+  try {
+    const id = req.userId;
+
+    const result = await userService.getUserProfile(id);
+    res.status(200).json({
+      success: true,
+      data: result,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export default {
+  update,
+  remove,
+  getSingle,
+  getAll,
+  getUserProfile,
+  getMyAppointment,
+};

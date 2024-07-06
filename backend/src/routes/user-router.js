@@ -9,5 +9,15 @@ userRouter.put("/:id", restrict([`patient`]), userController.update);
 userRouter.delete("/:id", restrict(`patient`), userController.remove);
 userRouter.get("/:id", restrict(`patient`), userController.getSingle);
 userRouter.get("/", restrict(`admin`), userController.getAll);
+userRouter.get(
+  "/profile/me",
+  restrict(`patient`),
+  userController.getUserProfile
+);
+userRouter.get(
+  "/appointments/my-appointments",
+  restrict(`patient`),
+  userController.getMyAppointment
+);
 
 export { userRouter };

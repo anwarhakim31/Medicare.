@@ -1,5 +1,6 @@
 import { ResponseError } from "../error/response-error.js";
 import Doctor from "../models/DoctorSchema.js";
+import Booking from "../models/BookingSchema.js";
 
 const update = async (id, request) => {
   const doctor = await Doctor.findByIdAndUpdate(id, request, { new: true });
@@ -55,4 +56,18 @@ const getAll = async (query) => {
   return doctor;
 };
 
-export default { update, remove, getSingle, getAll };
+const getDoctorProfile = async (id) => {
+  const doctor = await Doctor.findById(id);
+
+  if (!doctor) {
+    throw new ResponseError(404, "Doctor is not found");
+  }
+
+  const { passowrd, ...data } = doctor._doc;
+
+  const appointments = await Booking.find({ doctor: id });
+
+  return { data, appointments };
+};
+
+export default { update, remove, getSingle, getAll, getDoctorProfile };

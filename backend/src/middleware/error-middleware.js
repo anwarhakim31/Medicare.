@@ -11,18 +11,13 @@ const errorMiddleware = (err, req, res, next) => {
       .status(err.status)
       .json({
         errors: err.message,
-        success: false,
       })
       .end();
   } else {
-    res
-      .status(500)
-      .json({
-        errors: err.message,
-        success: false,
-        message: "Internal Server Error, Try Again",
-      })
-      .end();
+    res.status(500).json({
+      errors: err.message,
+      message: "Internal Server Error, Try Again",
+    });
   }
 };
 

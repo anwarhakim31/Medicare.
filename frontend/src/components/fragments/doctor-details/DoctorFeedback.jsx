@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import avatar from "../../../assets/images/patient-avatar.png";
-import { formatDate } from "../../../../util/util";
+import { formatDate } from "../../../util/util";
 import { AiFillStar } from "react-icons/ai";
 import FeedbackForm from "./FeedbackForm";
 

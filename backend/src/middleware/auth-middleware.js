@@ -9,7 +9,7 @@ export const authenticate = async (req, res, next) => {
   if (!authToken || !authToken.startsWith("Bearer ")) {
     return res
       .status(401)
-      .json({ success: false, errors: "Unauthorized" })
+      .json({ success: false, errors: "No Token, Authorization Denied" })
       .end();
   }
 
@@ -24,7 +24,7 @@ export const authenticate = async (req, res, next) => {
   } catch (error) {
     return res
       .status(401)
-      .json({ success: false, errors: "Unauthorized" })
+      .json({ success: false, errors: "No Token, Authorization Denied" })
       .end();
   }
 };

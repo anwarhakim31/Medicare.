@@ -56,4 +56,17 @@ const getAll = async (req, res, next) => {
   }
 };
 
-export default { update, remove, getSingle, getAll };
+const getDoctorProfile = async (req, res, next) => {
+  try {
+    const id = req.useId;
+    const { data, appointments } = await doctorService.getDoctorProfile(id);
+    res.status(200).json({
+      success: true,
+      data: { data, appointments },
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export default { update, remove, getSingle, getAll, getDoctorProfile };

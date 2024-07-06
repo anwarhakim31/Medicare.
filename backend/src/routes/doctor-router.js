@@ -22,4 +22,10 @@ doctorRouter.delete(
 doctorRouter.get("/:id", doctorController.getSingle);
 doctorRouter.get("/", doctorController.getAll);
 
+doctorRouter.get(
+  "/profile/me",
+  authenticate,
+  restrict(["doctor"], doctorController.getDoctorProfile)
+);
+
 export { doctorRouter };
