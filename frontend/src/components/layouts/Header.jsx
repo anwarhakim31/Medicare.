@@ -27,7 +27,7 @@ const Header = () => {
   const [isNav, setIsNav] = useState(false);
   const headerRef = useRef(null);
   const { state } = useAuth();
-  console.log(state);
+
   const handleToggleNav = () => {
     setIsNav(!isNav);
   };
@@ -106,7 +106,7 @@ const Header = () => {
           <div className="flex items-center gap-4">
             {state.token && state.user ? (
               <>
-                <div className="hidden">
+                <div className="">
                   <Link
                     to={`${
                       state.role === "doctor"
@@ -117,11 +117,10 @@ const Header = () => {
                     <figure className="w-[35px] h-[35px] rounded-full">
                       <img
                         src={state.user?.photo}
-                        alt="user-image"
-                        className="w-full h-full object-cover rounded-full"
+                        alt="user image"
+                        className="w-full h-full object-cover object-top rounded-full"
                       />
                     </figure>
-                    {/* <h1>{state.user?.name}</h1> */}
                   </Link>
                 </div>
               </>

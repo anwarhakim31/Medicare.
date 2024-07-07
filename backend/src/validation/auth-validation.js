@@ -6,7 +6,7 @@ const registerValidation = Joi.object({
   password: Joi.string().min(6).max(12).required(),
   gender: Joi.string().valid("male", "female"),
   role: Joi.string().default("patient").valid("patient", "doctor"),
-  photo: Joi.string().max(256),
+  photo: Joi.optional(),
 });
 
 const loginValidation = Joi.object({

@@ -3,7 +3,11 @@ import Doctor from "../models/DoctorSchema.js";
 import Booking from "../models/BookingSchema.js";
 
 const update = async (id, request) => {
-  const doctor = await Doctor.findByIdAndUpdate(id, request, { new: true });
+  const doctor = await Doctor.findByIdAndUpdate(
+    id,
+    { $set: request },
+    { new: true }
+  );
 
   if (!doctor) {
     throw new ResponseError(404, "Doctor is not found");

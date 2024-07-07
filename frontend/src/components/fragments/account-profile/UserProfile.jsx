@@ -39,12 +39,16 @@ const UserProfile = ({ user, refetchProfile }) => {
   const handleFileChange = async (e) => {
     const file = e.target.files[0];
 
-    const data = await uploadImageToCloudinary(file);
-
-    setSelectFile(data.url);
-    setFormData({ ...formData, photo: data.url });
+    setLoading(true);
+    try {
+      const res = await uploadImageToCloudinary(file);
+      setFormData({ ...formData, photo: res.url });
+    } catch (error) {
+      toast.error("Failed to upload image. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 

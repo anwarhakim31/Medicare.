@@ -46,7 +46,9 @@ const getSingle = async (req, res, next) => {
 
 const getAll = async (req, res, next) => {
   try {
-    const result = await doctorService.getAll();
+    const query = req.query.query;
+
+    const result = await doctorService.getAll(query);
     res.status(200).json({
       success: true,
       data: result,
@@ -58,7 +60,8 @@ const getAll = async (req, res, next) => {
 
 const getDoctorProfile = async (req, res, next) => {
   try {
-    const id = req.useId;
+    const id = req.userId;
+
     const { data, appointments } = await doctorService.getDoctorProfile(id);
     res.status(200).json({
       success: true,

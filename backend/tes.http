@@ -15,8 +15,8 @@ Content-Type: application/json
 Accept: application/json
 
 {
-    "email":"hakim@gmail.com",
-    "password":"hakim31"
+    "email":"hakimz31@gmail.com",
+    "password":"hakimz31"
 }
 
 
@@ -68,6 +68,7 @@ Accept: application/json
 GET  http://localhost:5000/api/v1/doctors/
 Content-Type: application/json
 Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ODZiMjFhMjUzY2FjODMxMjk2MzE0NCIsInJvbGUiOiJkb2N0b3IiLCJpYXQiOjE3MjAxNTE4NTgsImV4cCI6MTcyMDE1NTQ1OH0.J2fl1VTWs3dAAn6t0taWu5H72754yj4I4hoG3nrTa2M
 
 {
    
@@ -119,6 +120,15 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ODc2ZWU3N
 GET  http://localhost:5000/api/v1/doctors/668795209fa78b9b47ad01d6/reviews
 Content-Type: application/json
 Accept: application/json
+
+{
+ 
+}
+###
+GET  http://localhost:5000/api/v1/doctors/profile/me
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ODkzMGY4OWE3ZDJlY2E0YWE1NTBhNSIsInJvbGUiOiJkb2N0b3IiLCJpYXQiOjE3MjAyNzczMjcsImV4cCI6MTcyMDMyMDUyN30.gR-eRApwphDr0Om-DSo1wAEI8Uyj5QqI15E14kwiK3s
 
 {
  

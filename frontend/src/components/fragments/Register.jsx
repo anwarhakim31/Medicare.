@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import avatar from "../../assets/images/doctor-img02.png";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import uploadImageToCloudinary from "../../util/upload-cloudinary";
 import { URL } from "../../constant/config";
@@ -29,12 +28,20 @@ const Register = () => {
 
   const handleFileChange = async (e) => {
     const file = e.target.files[0];
+    setLoading(true);
+    try {
+      // Upload image to Cloudinary
+      const data = await uploadImageToCloudinary(file);
 
-    const data = await uploadImageToCloudinary(file);
-
-    setPreviewUrl(data.url);
-    setSelectFile(data.url);
-    setFormData({ ...formData, photo: data.url });
+      // Update previewUrl, selectFile, and formData
+      setPreviewUrl(data.url);
+      setSelectFile(data.url);
+      setFormData({ ...formData, photo: data.url });
+    } catch (error) {
+      toast.error("Failed to upload image. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -131,6 +138,7 @@ const Register = () => {
               src={previewUrl}
               alt="profile image"
               className="w-full h-full rounded-full object-contain object-center"
+              loading="lazy"
             />
           </figure>
         )}

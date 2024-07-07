@@ -13,7 +13,7 @@ const generateToken = (user) => {
   return jwt.sign(
     { id: user._id, role: user.role },
     process.env.JWT_SECRET_KEY,
-    { expiresIn: "12h" }
+    { expiresIn: "1d" }
   );
 };
 
@@ -69,9 +69,13 @@ const login = async (request) => {
   let user = null;
 
   const patient = await User.findOne({ email });
+  const doctor = await Doctor.findOne({ email });
 
   if (patient) {
     user = patient;
+  }
+  if (doctor) {
+    user = doctor;
   }
 
   if (!user) {
