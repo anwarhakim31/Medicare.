@@ -11,8 +11,8 @@ import { gmailRouter } from "../routes/gmail-router.js";
 
 const corsOption = {
   origin: true,
+  credentials: true,
 };
-
 export const app = express(json());
 
 app.get("/", (req, res) => {
