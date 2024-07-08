@@ -10,9 +10,7 @@ import { bookingRouter } from "../routes/booking-router.js";
 import { gmailRouter } from "../routes/gmail-router.js";
 
 const corsOption = {
-  origin: "*",
-  Credential: true,
-  methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+  origin: true,
 };
 
 export const app = express(json());
