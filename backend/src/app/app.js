@@ -10,7 +10,7 @@ import { bookingRouter } from "../routes/booking-router.js";
 import { gmailRouter } from "../routes/gmail-router.js";
 
 const corsOption = {
-  origin: true,
+  origin: "https://medicare-ten-chi.vercel.app",
   credentials: true,
 };
 export const app = express(json());
