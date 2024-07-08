@@ -12,7 +12,7 @@ import { gmailRouter } from "../routes/gmail-router.js";
 const corsOption = {
   origin: "*",
   Credential: true,
-  methods: ["GET", "POST", "PUT", "DELETE"],
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
 };
 
 export const app = express(json());
