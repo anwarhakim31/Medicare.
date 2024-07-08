@@ -10,6 +10,7 @@ import ContactPage from "../pages/contact";
 import UserAccount from "../pages/UserAccount";
 import DoctorAccount from "../pages/DoctorAccount";
 import ProtectedRoutes from "./ProtectedRoutes";
+import CheckoutSuccess from "../pages/checkoutSuccess";
 
 const Routers = () => {
   return (
@@ -38,6 +39,7 @@ const Routers = () => {
           </ProtectedRoutes>
         }
       />
+      <Route path="/checkout-success" element={<CheckoutSuccess />} />
     </Routes>
   );
 };

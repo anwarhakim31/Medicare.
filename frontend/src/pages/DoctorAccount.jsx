@@ -29,9 +29,9 @@ const DoctorAccount = () => {
         {errors ? (
           <Error errMessage={errors} />
         ) : (
-          <div className="grid lg:grid-cols-3 gap-[30px] lg:gap-[50px]">
+          <div className="grid md:grid-cols-3 gap-[30px] lg:gap-[50px]">
             <DoctorTab tab={tab} setTab={setTab} />
-            <div className="scroll overflow-auto lg:col-span-2">
+            <div className="scroll overflow-auto md:col-span-2">
               {doctorData.data?.isApproved === "pending" && (
                 <div className="flex p-4 mb-4 text-yellow-800 bg-yellow-50 rounded-lg">
                   <RiInformation2Fill className="flex-shrink w-5 h-5" />
@@ -85,9 +85,7 @@ const DoctorAccount = () => {
                 )}
 
                 {tab === "appointments" && (
-                  <DoctorAppointment
-                    appointments={doctorData.data.appointments}
-                  />
+                  <DoctorAppointment appointments={doctorData.appointments} />
                 )}
                 {tab === "settings" && (
                   <DoctorProfile

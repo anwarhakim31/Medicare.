@@ -4,8 +4,9 @@ import { AiOutlineDelete } from "react-icons/ai";
 import uploadImageToCloudinary from "../../../util/upload-cloudinary";
 import { toast } from "react-toastify";
 import HashLoader from "react-spinners/HashLoader";
-import { token, URL } from "../../../constant/config";
+import { URL } from "../../../constant/config";
 import { useAuth } from "../../../context/AuthContext";
+import useToken from "../../../hooks/useToken";
 
 const DoctorProfile = ({ doctorData, refetchProfile }) => {
   const [formData, setFormData] = useState({
@@ -16,7 +17,7 @@ const DoctorProfile = ({ doctorData, refetchProfile }) => {
     bio: "",
     gender: "",
     specialization: "",
-    price: "",
+    ticketPrice: "",
     qualifications: [],
     experiences: [],
     timeSlots: [],
@@ -26,6 +27,7 @@ const DoctorProfile = ({ doctorData, refetchProfile }) => {
 
   const [loading, setLoading] = useState(false);
   const { dispatch } = useAuth();
+  const token = useToken();
 
   useEffect(() => {
     setFormData({
@@ -36,7 +38,7 @@ const DoctorProfile = ({ doctorData, refetchProfile }) => {
       bio: doctorData?.bio || "",
       gender: doctorData?.gender || "",
       specialization: doctorData?.specialization || "",
-      price: doctorData?.ticketPrice || "",
+      ticketPrice: doctorData?.ticketPrice || "",
       qualifications: doctorData?.qualifications || "",
       experiences: doctorData?.experiences || "",
       timeSlots: doctorData?.timeSlots || "",
@@ -84,6 +86,10 @@ const DoctorProfile = ({ doctorData, refetchProfile }) => {
       }
 
       toast.success(result.message);
+      dispatch({
+        type: "UPDATE_USER",
+        payload: { photo: formData.photo },
+      });
       refetchProfile();
     } catch (error) {
       toast.error(error.message);
@@ -250,8 +256,8 @@ const DoctorProfile = ({ doctorData, refetchProfile }) => {
               <input
                 type="number"
                 placeholder="100.000"
-                name="price"
-                value={formData.price}
+                name="ticketPrice"
+                value={formData.ticketPrice}
                 onChange={handleInputChange}
                 className="form-input py-2.5"
               />

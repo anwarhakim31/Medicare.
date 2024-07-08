@@ -15,8 +15,8 @@ Content-Type: application/json
 Accept: application/json
 
 {
-    "email":"hakimz31@gmail.com",
-    "password":"hakimz31"
+    "email":"hakim31@gmail.com",
+    "password":"hakim31"
 }
 
 
@@ -47,17 +47,17 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ODc2ZWU3N
 GET  http://localhost:5000/api/v1/users/66876ee750e3abd78cd7cbc6    
 Content-Type: application/json
 Accept: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ODc2ZWU3NTBlM2FiZDc4Y2Q3Y2JjNiIsInJvbGUiOiJwYXRpZW50IiwiaWF0IjoxNzIwMTU0MzIyLCJleHAiOjE3MjAxNTc5MjJ9.kdk3dInh4yj5w_PcD8B8R3KUSdQ8hovQR0nXiyVdsOA
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2OGFlNDgxMjgyMWQzNzI5ODczMzMzMSIsInJvbGUiOiJwYXRpZW50IiwiaWF0IjoxNzIwMzc4ODAyLCJleHAiOjE3MjA0NjUyMDJ9.pDxIoMYmbaWk2sJTYxi5axzRCyAKM6YAwUY61dgsmY0"
 
 {
    
 }
 
 ###
-PUT   http://localhost:5000/api/v1/users/668691ed1943fd8f364ee987
+PATCH http://localhost:5000/api/v1/users/668ae4812821d37298733331
 Content-Type: application/json
 Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2OGFlNDgxMjgyMWQzNzI5ODczMzMzMSIsInJvbGUiOiJwYXRpZW50IiwiaWF0IjoxNzIwMzc4ODU0LCJleHAiOjE3MjA0NjUyNTR9.qokNO_5jms_-Dx45lJyYzCiX8jQWbhO6RlaxN7vWZqE
 
 {
    "role":"patient"
@@ -107,10 +107,10 @@ Accept: application/json
 ###
 ////review
 
-POST http://localhost:5000/api/v1/doctors/668795209fa78b9b47ad01d6/reviews
+POST http://localhost:5000/api/v1/doctors/668a8a8879a3fb2460455b44/reviews
 Content-Type: application/json
 Accept: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ODc2ZWU3NTBlM2FiZDc4Y2Q3Y2JjNiIsInJvbGUiOiJwYXRpZW50IiwiaWF0IjoxNzIwMTY3NjYzLCJleHAiOjE3MjAxNzEyNjN9.lprZUiIuU-VeIJslonu7216goBraXmfGd3rStuTlp-I
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2OGFiNzgyMjgyMWQzNzI5ODczMzE2OCIsInJvbGUiOiJwYXRpZW50IiwiaWF0IjoxNzIwMzY4MTc1LCJleHAiOjE3MjA0NTQ1NzV9.sq3K2FVKVvYBqkcuw50a7FUz54eNy-s0tID6Qlp14-8
 
 {
    "reviewText":"Good Doctors",
@@ -129,6 +129,25 @@ GET  http://localhost:5000/api/v1/doctors/profile/me
 Content-Type: application/json
 Accept: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ODkzMGY4OWE3ZDJlY2E0YWE1NTBhNSIsInJvbGUiOiJkb2N0b3IiLCJpYXQiOjE3MjAyNzczMjcsImV4cCI6MTcyMDMyMDUyN30.gR-eRApwphDr0Om-DSo1wAEI8Uyj5QqI15E14kwiK3s
+
+{
+ 
+}
+
+###
+POST  http://localhost:5000/api/v1/bookings/checkout-session/668a8a8879a3fb2460455b44
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2OGFlODc1YmJkZGI2OWQyMjY3OTFjYyIsInJvbGUiOiJwYXRpZW50IiwiaWF0IjoxNzIwNDE3NDk5LCJleHAiOjE3MjA1MDM4OTl9.J7zZa2ObGPiq4DrjJBcVd9CeI-4iSQ7I94aNlN57zzQ
+
+{
+ 
+}
+###
+GET  http://localhost:5000/api/v1/users/appointments/my-appointments
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2OGFlODc1YmJkZGI2OWQyMjY3OTFjYyIsInJvbGUiOiJwYXRpZW50IiwiaWF0IjoxNzIwNDE3NDk5LCJleHAiOjE3MjA1MDM4OTl9.J7zZa2ObGPiq4DrjJBcVd9CeI-4iSQ7I94aNlN57zzQ
 
 {
  

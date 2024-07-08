@@ -1,13 +1,50 @@
 import React, { useState } from "react";
 import { AiFillStar } from "react-icons/ai";
+import { useParams } from "react-router-dom";
+import { token, URL } from "../../../constant/config";
+import { toast } from "react-toastify";
+import HashLoader from "react-spinners/HashLoader";
 
-const FeedbackForm = () => {
+const FeedbackForm = ({ refatchData, setShowFeedbackForm }) => {
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);
   const [reviewText, setReviewText] = useState("");
+  const [loading, setLoading] = useState(false);
+  const { id } = useParams();
 
   const handleSubmit = async (e) => {
-    e.preventDevault();
+    e.preventDefault();
+    setLoading(true);
+    try {
+      if (!rating || !reviewText) {
+        return toast.error("Ratings & Review Fields are Required");
+      }
+      const res = await fetch(URL + "/doctors/" + id + "/reviews", {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+          authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          reviewText: reviewText,
+          rating: rating,
+        }),
+      });
+
+      const result = await res.json();
+
+      if (!res.ok) {
+        throw new Error(result.errors);
+      }
+
+      toast.success(result.message);
+      refatchData();
+      setShowFeedbackForm(false);
+    } catch (error) {
+      toast.error(error.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -58,8 +95,17 @@ const FeedbackForm = () => {
           onChange={(e) => setReviewText(e.target.value)}
         ></textarea>
 
-        <button type="submit" className="btn" onClick={handleSubmit}>
-          Submit Feedback
+        <button
+          type="submit"
+          className="btn"
+          onClick={handleSubmit}
+          disabled={loading}
+        >
+          {loading ? (
+            <HashLoader size={18} color="#ffffff" />
+          ) : (
+            "Submit Feedback"
+          )}
         </button>
       </div>
     </form>

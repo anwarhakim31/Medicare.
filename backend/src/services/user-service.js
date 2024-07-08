@@ -1,12 +1,21 @@
 import { ResponseError } from "../error/response-error.js";
-import Booking from "../models/BookingSchema.js";
+
 import User from "../models/UserSchema.js";
 import Doctor from "../models/DoctorSchema.js";
+import bcrypt from "bcryptjs";
+import Booking from "../models/BookingSchema.js";
 const update = async (id, request) => {
   const user = await User.findById(id);
 
   if (!user) {
     throw new ResponseError(404, "User is not found");
+  }
+
+  if (request.password) {
+    const salt = await bcrypt.genSalt(10);
+    const hashPassword = await bcrypt.hash(request.password, salt);
+
+    request.password = hashPassword;
   }
 
   return User.updateOne({ id }, { $set: request });
@@ -55,7 +64,7 @@ const getUserProfile = async (id) => {
 };
 
 const getMyAppointment = async (userId) => {
-  const bookings = await BookingSchema.find({ user: userId });
+  const bookings = await Booking.find({ user: userId });
 
   const doctorId = bookings.map((el) => el.doctor.id);
 

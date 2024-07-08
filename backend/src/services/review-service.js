@@ -12,7 +12,7 @@ const getAllreview = async () => {
   return review;
 };
 
-const createReview = async (doctorId, request, userId) => {
+const createReview = async (doctorId, request) => {
   const newReview = new Review(request);
 
   const saveReview = await newReview.save();

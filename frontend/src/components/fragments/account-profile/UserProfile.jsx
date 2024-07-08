@@ -3,25 +3,28 @@ import { toast } from "react-toastify";
 import uploadImageToCloudinary from "../../../util/upload-cloudinary";
 import { useNavigate } from "react-router-dom";
 import HashLoader from "react-spinners/HashLoader";
-import { URL, token } from "../../../constant/config";
+import { URL } from "../../../constant/config";
+import useToken from "../../../hooks/useToken";
+import { useAuth } from "../../../context/AuthContext";
 
 const UserProfile = ({ user, refetchProfile }) => {
   const [selectFile, setSelectFile] = useState(null);
-
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    password: "",
+    password: null,
     photo: null,
     bloodType: "",
     gender: "",
   });
 
+  const token = useToken();
+  const { dispatch } = useAuth();
+
   useEffect(() => {
     setFormData({
       name: user.name || "",
       email: user.email || "",
-      password: "",
       photo: user.photo || "",
       gender: user.gender || "",
       bloodType: user.bloodType || "",
@@ -55,7 +58,7 @@ const UserProfile = ({ user, refetchProfile }) => {
     setLoading(true);
     try {
       const res = await fetch(URL + "/users/" + user._id, {
-        method: "PUT",
+        method: "PATCH",
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + token,
@@ -68,6 +71,7 @@ const UserProfile = ({ user, refetchProfile }) => {
       }
 
       toast.success(message);
+      dispatch({ type: "UPDATE_USER", payload: { photo: formData.photo } });
       refetchProfile();
     } catch (error) {
       toast.error(error.message);

@@ -67,7 +67,7 @@ const getDoctorProfile = async (id) => {
     throw new ResponseError(404, "Doctor is not found");
   }
 
-  const { passowrd, ...data } = doctor._doc;
+  const { password, ...data } = doctor._doc;
 
   const appointments = await Booking.find({ doctor: id });
 

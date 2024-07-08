@@ -74,7 +74,7 @@ const getMyAppointment = async (req, res, next) => {
   try {
     const id = req.userId;
 
-    const result = await userService.getUserProfile(id);
+    const result = await userService.getMyAppointment(id);
     res.status(200).json({
       success: true,
       data: result,

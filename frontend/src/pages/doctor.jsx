@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BsArrowRight } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import starIcon from "../assets/images/Star.png";
@@ -11,6 +11,7 @@ import Error from "../components/fragments/Error";
 
 const DoctorPage = () => {
   const [query, setQuary] = useState("");
+  const [debounceQuery, setDebounceQuey] = useState("");
 
   const handleSearch = () => {
     setQuary(query.trim());
@@ -20,7 +21,15 @@ const DoctorPage = () => {
     data: doctors,
     loading,
     errors,
-  } = useFetchData(URL + "/doctors?query=" + query);
+  } = useFetchData(URL + "/doctors?query=" + debounceQuery);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setDebounceQuey(query);
+    }, 700);
+
+    return () => clearTimeout(timeout);
+  }, [query]);
 
   return (
     <>
@@ -90,11 +99,11 @@ const DoctorPage = () => {
                         +{doctor.totalPatients} patienst{" "}
                       </h3>
                       <p className="text-[14px] leading-6 font-normal">
-                        {doctor.hospital}
+                        {doctor.experiences[0].hospital}
                       </p>
                     </div>
                     <Link
-                      to={"/doctors"}
+                      to={`/doctors/${doctor._id}`}
                       className="w-11 h-11 mt-4 rounded-full border border-solid border-slate-800 mt-30px mx-auto flex items-center justify-center group hover:bg-primaryColor hover:border-none"
                     >
                       <BsArrowRight className="group-hover:text-white" />
