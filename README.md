@@ -10,6 +10,8 @@ Medicare is a medical booking, patients can book a doctor if the doctor is part 
 
 -react-router-dom: For routing
 
+-tailwind for stayling
+
 -fetch: For making HTTP requests
 
 -context API: For state management
