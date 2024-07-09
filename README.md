@@ -1,6 +1,8 @@
 # Medicare. MERN Project
 
-The dependencies that this project uses:
+Medicare is a medical booking, patients can book a doctor if the doctor is part of this website. this website can access 2 roles, namely patients and doctors.
+
+# The dependencies that this project uses:
 
 *Frontend*
 
