@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { URL } from "../constant/config";
+import HashLoading from "react-spinners/HashLoader";
 
 const ContactPage = () => {
   const [loading, setLoading] = useState(false);
@@ -88,8 +89,12 @@ const ContactPage = () => {
               className="form-input"
             />
           </div>
-          <button type="submit" className="btn rounded sm:w-fit">
-            Submit
+          <button
+            type="submit"
+            disabled={loading}
+            className="btn rounded sm:w-fit"
+          >
+            {loading ? <HashLoading size={18} color="#ffffff" /> : " Submit"}
           </button>
         </form>
       </div>
