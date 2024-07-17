@@ -18,7 +18,7 @@ Medicare is a medical booking, patients can book a doctor if the doctor is part 
 
 -react-toastify: For toast notifications
 
-- Strapi for payment getway
+-Strapi for payment getway
 
 
 *Backend*
