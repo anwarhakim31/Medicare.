@@ -83,23 +83,23 @@ Before you begin, ensure you have the following installed on your machine:
 
     PORT = 5000
   
-    MONGO_URL = mongodb+srv://hakim:310501@hakim.usk5ty9.mongodb.net/booking-doctor?retryWrites=true&w=majority&appName=hakim
+    MONGO_URL = 
     
-    JWT_SECRET_KEY = C3GmZ-b2Cyp8QgCfKrTEISGBUT3AczMnMz1Fi58EqFNDLe4miP9M6sLnWmWjqAsSwd4npGmWJiLHnPDJiJtJXUWXXSnZPOokxV3wQG9AdVrbWIAqTGSMgKXj8_0bVhLmxByPwSxgoVjQ4vkCXBEnm7hhA-GSkWCE_Zgab-Nw56MjVyfMswcEIT2qoyiSQ0x0uYE5Y9CQtMrohYosDew4Yvef10dkBVyLSnDATBQjiHSXYLkp3TKvZxj5CpNE5zDG13fecE6JVewFlERTL6XKgkIT2lP1yzHysaEspBz8cmrHRSDs77wDWAqoW-XBjHdh_FCr43LWSZMmoVQZrPdYaA
+    JWT_SECRET_KEY = 
     
-    STRIPE_SECRET_KEY=sk_test_51Pa7ypETQcOMY9NxJflWuL47AlX7ysInZDJwJwlEIFsjQ71sRcCjVb5bLNadDXT92Dd3mExXgC1zAXH0nE3rmLd50085fao8GB
+    STRIPE_SECRET_KEY=
     
     CLIENT_SITE_URL=http://localhost:5173
     
-    EMAIL_USER= anwarhakim001@gmail.com
+    EMAIL_USER= 
     
-    EMAIL_PASS = pkgfcrtsnfcxhugp
+    EMAIL_PASS = 
 
 2. Create a .env file in the root frontend of your project.
  
-    VITE_CLOUDE_NAME =anwarhakim
+    VITE_CLOUDE_NAME =
     
-    VITE_UPLOAD_PRESET =doctor-booking
+    VITE_UPLOAD_PRESET =
 
 ## Development
 
