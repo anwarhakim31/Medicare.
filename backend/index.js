@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-const port = process.env.PORT || 8000;
+const port = process.env.PORT || 5000;
 
 mongoose.set("strictQuery", true);
 
@@ -14,7 +14,7 @@ const connectDB = async () => {
 
     console.log("MongoDB is connected");
   } catch (error) {
-    console.log("MongoDB is connection failed");
+    console.log(error);
   }
 };
 

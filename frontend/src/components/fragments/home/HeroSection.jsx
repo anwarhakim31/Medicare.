@@ -2,6 +2,7 @@ import React from "react";
 import heroImg1 from "../../../assets/images/hero-img01.png";
 import heroImg2 from "../../../assets/images/hero-img02.png";
 import heroImg3 from "../../../assets/images/hero-img03.png";
+import { Link } from "react-router-dom";
 
 const HeroSection = () => {
   return (
@@ -17,7 +18,9 @@ const HeroSection = () => {
                 Schedule your appointment at Medicare with ease. Choose from our
                 range of specialties. Take control of your health now!
               </p>
-              <button className="btn">Request an Appointment</button>
+              <button className="btn">
+                <Link to={"/doctors"}>Request an Appointment</Link>
+              </button>
             </div>
             <div className="mt-[30px] lg:mt-[70px] flex flex-col lg:flex-row lg:items-center gap-5 lg:gap-[30px]">
               <div>

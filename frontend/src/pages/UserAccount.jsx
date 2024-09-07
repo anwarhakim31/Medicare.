@@ -1,12 +1,14 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import UserProfile from "../components/fragments/account-profile/UserProfile";
 import UserBooking from "../components/fragments/account-profile/UserBooking";
 import useGetProfile from "../hooks/useFetchData";
 import { URL } from "../constant/config.js";
 import Error from "../components/fragments/Error.jsx";
+import { useNavigate } from "react-router-dom";
 
 const UserAccount = () => {
+  const navigate = useNavigate();
   const { dispatch } = useAuth();
   const [tab, setTab] = useState("bookings");
   const [trigger, setTrigger] = useState(false);
@@ -24,6 +26,12 @@ const UserAccount = () => {
   const refetchProfile = useCallback(() => {
     setTrigger((prev) => !prev);
   }, []);
+
+  useEffect(() => {
+    if (errors) {
+      navigate("/home");
+    }
+  }, [errors, navigate]);
 
   return (
     <section>

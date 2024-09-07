@@ -3,34 +3,46 @@ import React, { useState } from "react";
 import useToken from "../../../hooks/useToken";
 import { toast } from "react-toastify";
 import { URL } from "../../../constant/config";
+import { useNavigate } from "react-router-dom";
 
 const SidePanel = ({ doctorId, price, timeSlots }) => {
   const [loading, setLoading] = useState(false);
   const token = useToken();
+  const navigate = useNavigate();
 
   const handleBooking = async () => {
     setLoading(true);
-    try {
-      const res = await fetch(`${URL}/bookings/checkout-session/${doctorId}`, {
-        method: "POST",
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      });
 
-      const result = await res.json();
+    const user = localStorage.getItem("user");
 
-      if (!res.ok) {
-        throw new Error(result.errors || "Failed to create checkout session");
+    if (user) {
+      try {
+        const res = await fetch(
+          `${URL}/bookings/checkout-session/${doctorId}`,
+          {
+            method: "POST",
+            headers: {
+              Authorization: "Bearer " + token,
+            },
+          }
+        );
+
+        const result = await res.json();
+
+        if (!res.ok) {
+          throw new Error(result.errors || "Failed to create checkout session");
+        }
+
+        if (result.session.url) {
+          window.location.href = result.session.url;
+        }
+      } catch (error) {
+        toast.error(error.message);
+      } finally {
+        setLoading(false);
       }
-
-      if (result.session.url) {
-        window.location.href = result.session.url;
-      }
-    } catch (error) {
-      toast.error(error.message);
-    } finally {
-      setLoading(false);
+    } else {
+      navigate("/login");
     }
   };
 

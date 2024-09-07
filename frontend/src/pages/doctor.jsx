@@ -39,7 +39,7 @@ const DoctorPage = () => {
           <div className="max-w-[570px] mt-[30px] mx-auto bg-[#0066ff2c] rounded-md flex items-center justify-between">
             <input
               type="search"
-              className="py-4 pl-4 pr-4 bg-transparent w-full focus:outline-none cursor-pointer placeholder:text-textColor"
+              className="py-4 pl-4 pr-4 bg-transparent w-full focus:outline-none  placeholder:text-textColor"
               placeholder="Search Doctor by name or specification"
               onChange={(e) => setQuary(e.target.value)}
             />
@@ -58,7 +58,7 @@ const DoctorPage = () => {
         <div className="container">
           {loading && <Loading />}
           {errors && <Error errMessage={errors} />}
-          {doctors.length === 0 && <Notfound />}
+          {!loading && doctors.length === 0 && <Notfound />}
           {!loading && (
             <div className="grid grid-cols-4 mobile:grid-cols-12 lg:grid-cols-8 mt-[30px] gap-6">
               {doctors.map((doctor, index) => (
@@ -99,7 +99,7 @@ const DoctorPage = () => {
                         +{doctor.totalPatients} patienst{" "}
                       </h3>
                       <p className="text-[14px] leading-6 font-normal">
-                        {doctor.experiences[0].hospital}
+                        {doctor?.experiences[0]?.hospital}
                       </p>
                     </div>
                     <Link

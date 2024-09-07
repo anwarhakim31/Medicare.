@@ -7,17 +7,26 @@ import SidePanel from "../components/fragments/doctor-details/SidePanel";
 import { useParams } from "react-router-dom";
 import useFetchData from "../hooks/useFetchData";
 import { URL } from "../constant/config";
+import Loading from "../components/fragments/Loading";
 
 const DoctorDetailsPage = () => {
   const [tab, setTab] = useState("About");
   const [trigger, setTrigger] = useState(false);
   const { id } = useParams();
 
-  const { data } = useFetchData(URL + "/doctors/" + id, trigger);
+  const { data, loading } = useFetchData(URL + "/doctors/" + id, trigger);
 
   const refatchData = useCallback(() => {
     setTrigger((prevState) => !prevState);
   }, []);
+
+  if (loading) {
+    return (
+      <div className="fixed inset-0 bg-white flex items-center justify-center">
+        <Loading />
+      </div>
+    );
+  }
 
   return (
     <section className="max-w-[1170px] px-5 mx-auto">

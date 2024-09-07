@@ -22,13 +22,15 @@ const UserProfile = ({ user, refetchProfile }) => {
   const { dispatch } = useAuth();
 
   useEffect(() => {
-    setFormData({
-      name: user.name || "",
-      email: user.email || "",
-      photo: user.photo || "",
-      gender: user.gender || "",
-      bloodType: user.bloodType || "",
-    });
+    if (user) {
+      setFormData({
+        name: user.name || "",
+        email: user.email || "",
+        photo: user.photo || "",
+        gender: user.gender || "",
+        bloodType: user.bloodType || "",
+      });
+    }
   }, [user]);
 
   const [loading, setLoading] = useState(false);

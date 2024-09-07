@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const useFetchData = (url, trigger) => {
+  const navigate = useNavigate();
   const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [errors, setErrors] = useState(null);
   const [token, setToken] = useState(null);
 
@@ -13,9 +15,8 @@ const useFetchData = (url, trigger) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      if (!token) return; // Hanya fetch data jika token tersedia
+      if (!token) return;
 
-      setLoading(true);
       try {
         const res = await fetch(url, {
           headers: { Authorization: `Bearer ${token}` },
