@@ -14,7 +14,7 @@ const corsOption = {
   methods: ["GET", "PUT", "PATCH", "POST", "DELETE"],
 };
 
-export const app = express(json());
+export const app = express();
 
 app.get("/", (req, res) => {
   res.send("api is working");
