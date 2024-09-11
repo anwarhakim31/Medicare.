@@ -1,3 +1,3 @@
-export const URL = "http://localhost:3000/api/v1";
+export const URL = import.meta.env.VITE_SERVER_URL;
 
 export const token = localStorage.getItem("token");
