@@ -71,6 +71,7 @@ const DoctorPage = () => {
                       src={doctor.photo}
                       alt={doctor.name}
                       className="w-full"
+                      loading="lazy"
                     />
                   </div>
                   <h2 className="text-[18px] leading-[30px] lg:text-[26px] lg:leading-9 text-headingColor font-bold mt-3 lg:mt-5">

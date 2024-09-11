@@ -23,6 +23,13 @@ const UserAccount = () => {
     dispatch({ type: "LOGOUT" });
   };
 
+  useEffect(() => {
+    if (errors === "No Token, Authorization Denied") {
+      navigate("/home");
+      dispatch({ type: "LOGOUT" });
+    }
+  }, [errors, navigate, dispatch]);
+
   const refetchProfile = useCallback(() => {
     setTrigger((prev) => !prev);
   }, []);

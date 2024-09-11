@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import useGetProfile from "../hooks/useFetchData";
 import { URL } from "../constant/config.js";
 import Error from "../components/fragments/Error.jsx";
@@ -8,8 +8,12 @@ import starIcon from "../assets/images/Star.png";
 import DoctorAbout from "../components/fragments/doctor-details/DoctorAbout.jsx";
 import DoctorProfile from "../components/fragments/account-profile/DoctorProfile.jsx";
 import DoctorAppointment from "../components/fragments/account-profile/DoctorAppointment.jsx";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext.jsx";
 
 const DoctorAccount = () => {
+  const navigate = useNavigate();
+  const { dispatch } = useAuth();
   const [tab, setTab] = useState("overview");
   const [trigger, setTrigger] = useState(false);
 
@@ -18,6 +22,13 @@ const DoctorAccount = () => {
     loading,
     errors,
   } = useGetProfile(`${URL}/doctors/profile/me`, trigger);
+
+  useEffect(() => {
+    if (errors === "No Token, Authorization Denied") {
+      navigate("/home");
+      dispatch({ type: "LOGOUT" });
+    }
+  }, [errors, navigate, dispatch]);
 
   const refetchProfile = useCallback(() => {
     setTrigger((prev) => !prev);

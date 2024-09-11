@@ -3,8 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
 const useFetchData = (url, trigger) => {
-  const dispatch = useAuth();
-  const navigate = useNavigate();
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [errors, setErrors] = useState(null);
@@ -28,10 +26,6 @@ const useFetchData = (url, trigger) => {
 
         if (!res.ok) {
           throw new Error(result.errors);
-        }
-        if (res.status === 401) {
-          navigate("/home");
-          dispatch({ type: "LOGOUT" });
         }
 
         setData(result.data);
