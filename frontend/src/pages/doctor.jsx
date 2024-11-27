@@ -4,14 +4,20 @@ import { Link } from "react-router-dom";
 import starIcon from "../assets/images/Star.png";
 import useFetchData from "../hooks/useFetchData";
 import { URL } from "../constant/config";
-import HashLoader from "react-spinners/HashLoader";
+
 import Loading from "../components/fragments/Loading";
 import Notfound from "../components/fragments/Notfound";
 import Error from "../components/fragments/Error";
+import { useInView } from "react-intersection-observer";
+import { motion as m } from "framer-motion";
 
 const DoctorPage = () => {
   const [query, setQuary] = useState("");
   const [debounceQuery, setDebounceQuey] = useState("");
+  const { ref, inView } = useInView({
+    threshold: 0.2,
+    triggerOnce: true,
+  });
 
   const handleSearch = () => {
     setQuary(query.trim());
@@ -60,9 +66,15 @@ const DoctorPage = () => {
           {errors && <Error errMessage={errors} />}
           {!loading && doctors.length === 0 && <Notfound />}
           {!loading && (
-            <div className="grid grid-cols-4 mobile:grid-cols-12 lg:grid-cols-8 mt-[30px] gap-6">
+            <div
+              ref={ref}
+              className="grid grid-cols-4 mobile:grid-cols-12 lg:grid-cols-8 mt-[30px] gap-6"
+            >
               {doctors.map((doctor, index) => (
-                <div
+                <m.div
+                  initial={{ opacity: 0, y: 100 }}
+                  animate={inView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
                   key={doctor._id}
                   className="p-3 xl:p-5 col-span-full xs:col-span-4  mobile:col-span-6 md:col-span-4 lg:col-span-2 xl:col-span-2"
                 >
@@ -110,7 +122,7 @@ const DoctorPage = () => {
                       <BsArrowRight className="group-hover:text-white" />
                     </Link>
                   </div>
-                </div>
+                </m.div>
               ))}
             </div>
           )}

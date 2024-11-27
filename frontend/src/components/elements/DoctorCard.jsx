@@ -4,10 +4,17 @@ import { Link } from "react-router-dom";
 import { BsArrowRight } from "react-icons/bs";
 import useFetchData from "../../hooks/useFetchData";
 import { URL } from "../../constant/config";
+import { useInView } from "react-intersection-observer";
+import { motion as m } from "framer-motion";
 
 const DoctorCard = () => {
-  const { data, loading, errors } = useFetchData(URL + "/doctors/");
+  const { data } = useFetchData(URL + "/doctors/");
   const [doctor, setDoctor] = useState([]);
+
+  const { ref, inView } = useInView({
+    threshold: 0.2,
+    triggerOnce: true,
+  });
 
   useEffect(() => {
     if (data) {
@@ -19,9 +26,15 @@ const DoctorCard = () => {
   }, [data]);
 
   return (
-    <div className="grid grid-cols-4 mobile:grid-cols-12 lg:grid-cols-9 mt-[30px] gap-6">
+    <div
+      ref={ref}
+      className="grid grid-cols-4 mobile:grid-cols-12 lg:grid-cols-9 mt-[30px] gap-6"
+    >
       {doctor.map((doctor, index) => (
-        <div
+        <m.div
+          initial={{ opacity: 0, y: 100 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5, delay: index * 0.1 }}
           key={doctor._id}
           className="p-3 xl:p-5 col-span-full mobile:col-span-6 md:col-span-4 lg:col-span-3"
         >
@@ -64,7 +77,7 @@ const DoctorCard = () => {
               <BsArrowRight className="group-hover:text-white" />
             </Link>
           </div>
-        </div>
+        </m.div>
       ))}
     </div>
   );

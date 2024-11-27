@@ -4,21 +4,43 @@ import icon2 from "../../../assets/images/icon02.png";
 import icon3 from "../../../assets/images/icon03.png";
 import { BsArrowRight } from "react-icons/bs";
 import { Link } from "react-router-dom";
+import { motion as m } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 const HIWSection = () => {
+  const { ref, inView } = useInView({
+    threshold: 0.2,
+    triggerOnce: true,
+  });
+
   return (
-    <section>
-      <div className="container">
+    <section ref={ref}>
+      <div className="container overflow-hidden">
         <div className="lg:w-[470px] mx-auto">
-          <h2 className="heading text-center">
+          <m.h2
+            initial={{ opacity: 0, y: -100 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="heading text-center"
+          >
             Providing the best medical services
-          </h2>
-          <p className="text-para text-center">
+          </m.h2>
+          <m.p
+            initial={{ opacity: 0, y: -100 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="text-para text-center"
+          >
             World-class care for every-one. Our health System offers unmatched,
             expected health care.{" "}
-          </p>
+          </m.p>
         </div>
         <div className="grid grid-cols-4 mobile:grid-cols-12 xl:grid-cols-9 mt-20 gap-4">
-          <div className="col-span-full  mobile:col-span-4  xl:col-span-3">
+          <m.div
+            initial={{ opacity: 0, y: 100 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="col-span-full  mobile:col-span-4  xl:col-span-3"
+          >
             <figure className="w-full h-32">
               <img
                 src={icon1}
@@ -42,8 +64,13 @@ const HIWSection = () => {
             >
               <BsArrowRight className="group-hover:text-white" />
             </Link>
-          </div>
-          <div className="col-span-full  mobile:col-span-4  xl:col-span-3">
+          </m.div>
+          <m.div
+            initial={{ opacity: 0, y: 100 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            className="col-span-full  mobile:col-span-4  xl:col-span-3"
+          >
             <figure className="w-full h-32">
               <img
                 src={icon2}
@@ -66,9 +93,14 @@ const HIWSection = () => {
             >
               <BsArrowRight className="group-hover:text-white" />
             </Link>
-          </div>
+          </m.div>
 
-          <div className="col-span-full  mobile:col-span-4  xl:col-span-3">
+          <m.div
+            initial={{ opacity: 0, y: 100 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.5 }}
+            className="col-span-full  mobile:col-span-4  xl:col-span-3"
+          >
             <figure className="w-full h-32">
               <img
                 src={icon3}
@@ -91,7 +123,7 @@ const HIWSection = () => {
             >
               <BsArrowRight className="group-hover:text-white" />
             </Link>
-          </div>
+          </m.div>
         </div>
       </div>
     </section>

@@ -2,12 +2,25 @@ import React from "react";
 import { services } from "../../data/services";
 import { Link } from "react-router-dom";
 import { BsArrowBarRight, BsArrowRight } from "react-icons/bs";
+import { motion as m } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 
 const ServicesCard = () => {
+  const { ref, inView } = useInView({
+    threshold: 0.2,
+    triggerOnce: true,
+  });
+
   return (
-    <div className="grid grid-cols-4 mobile:grid-cols-12 xl:grid-cols-9 gap-5 mt-[30px] lg:mt-[55px]">
+    <div
+      ref={ref}
+      className="grid grid-cols-4 mobile:grid-cols-12 xl:grid-cols-9 gap-5 mt-[30px] lg:mt-[55px]"
+    >
       {services.map((item, index) => (
-        <div
+        <m.div
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={inView ? { opacity: 1, scale: 1 } : {}}
+          transition={{ duration: 0.5, delay: index * 0.1 }}
           key={index + 1}
           className="col-span-full mobile:col-span-6 md:col-span-4 lg:col-span-4 xl:col-span-3"
         >
@@ -37,7 +50,7 @@ const ServicesCard = () => {
               {index + 1}
             </span>
           </div>
-        </div>
+        </m.div>
       ))}
     </div>
   );

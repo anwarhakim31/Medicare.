@@ -3,13 +3,25 @@ import featureImg from "../../../assets/images/feature-img.png";
 import { Link } from "react-router-dom";
 import videoIcon from "../../../assets/images/video-icon.png";
 import avatarIcon from "../../../assets/images/avatar-icon.png";
+import { motion as m } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 
 const FeatureSection = () => {
+  const { ref, inView } = useInView({
+    threshold: 0.2,
+    triggerOnce: true,
+  });
+
   return (
     <section>
-      <div className="container">
+      <div ref={ref} className="container overflow-hidden">
         <div className="flex items-center justify-between flex-col lg:flex-row">
-          <div className="xl:w-[670px]">
+          <m.div
+            initial={{ opacity: 0, x: -100 }}
+            animate={inView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="xl:w-[670px]"
+          >
             <h2 className="heading">
               Get virtual treatment <br />
               anytime.
@@ -35,8 +47,14 @@ const FeatureSection = () => {
             <Link to={"/"}>
               <button className="btn">Learn More</button>
             </Link>
-          </div>
-          <figure className="relative z-10 lg:w-[770px] flex justify-end mt-[50px] lg:mt-0">
+          </m.div>
+          <m.div
+            initial={{ opacity: 0, x: 100 }}
+            animate={inView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            figure
+            className="relative z-10 lg:w-[770px] flex justify-end mt-[50px] lg:mt-0"
+          >
             <img src={featureImg} alt="featureImg" />
 
             <div className="absolute w-[150px] lg:w-[248px] bg-white bottom-[50px] left-0 md:bottom-[60px] md:left-1 z-20 p-2 pb-3 lg:pt-4 lg:px-4 lg:pb-[26px] rounded-[10px]">
@@ -68,7 +86,7 @@ const FeatureSection = () => {
                 </figcaption>
               </figure>
             </div>
-          </figure>
+          </m.div>
         </div>
       </div>
     </section>

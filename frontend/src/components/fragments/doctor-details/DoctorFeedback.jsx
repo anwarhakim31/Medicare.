@@ -18,14 +18,15 @@ const DoctorFeedback = ({ reviews, totalRating, refatchData }) => {
   const { state } = useAuth();
 
   useEffect(() => {
-    if (reviews.length > 0) {
+    if (id && state.user && reviews?.length > 0) {
       const total = reviews.filter(
-        (review) => review?.user?._id === state.user._id && review.doctor === id
-      ).length;
+        (review) =>
+          review?.user?._id === state?.user?._id && review?.doctor === id
+      )?.length;
 
       setTotalFeedbackUser(total);
     }
-  }, [reviews]);
+  }, [reviews && state]);
 
   useEffect(() => {
     const getBook = async () => {
@@ -67,8 +68,8 @@ const DoctorFeedback = ({ reviews, totalRating, refatchData }) => {
         </h4>
         {reviews && (
           <div className="max-h-[50vh] w-full overflow-scroll scroll">
-            {reviews.length > 0 &&
-              reviews.map((review, i) => (
+            {reviews?.length > 0 &&
+              reviews?.map((review, i) => (
                 <div key={i} className="flex justify-between gap-10 mb-[30px] ">
                   <div className=" flex gap-3">
                     <figure className="w-10 h-10 rounded-full">
@@ -103,7 +104,7 @@ const DoctorFeedback = ({ reviews, totalRating, refatchData }) => {
           <div className="text-center">
             <button
               className={`${
-                history.length > 0 && history.some((his) => his._id === id)
+                history?.length > 0 && history?.some((his) => his?._id === id)
                   ? "block"
                   : "hidden"
               } btn`}
